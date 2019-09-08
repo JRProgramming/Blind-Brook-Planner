@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+}
+header {
+    margin: 0;
+    background-color: blue;
+    width: 100%;
+    padding: 20px;
+    z-index: 10;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.heading {
+    margin: 0;
+    font-family: Arial;
+    color: white;
+}
+h3 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: solid grey 1px;
+}
+.class {
+    display: inline-block;
+    width: 200px;
+    background: lightgrey;
+    margin: 20px 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: Arial;
+}
+input[type="text"] {
+    background-color: lightgrey;
+    border: lightgrey 0;
+    outline: 0;
+    width: 100%;
+    border-bottom: solid grey 1px;
+    margin-top: 20px;
+    padding-bottom: 3px;
+    line-height: 20px;
+}
