@@ -57,7 +57,6 @@ function checkBoxes(box, id) {
     saveCheckBox(box, id)
 }
 function saveCheckBox(box, id) {
-    console.log(id)
     if(id != null) {
        if(document.getElementById("cb" + id).checked) {
            document.getElementById("cb" + id).setAttribute("checked", true)
