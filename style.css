@@ -13,6 +13,11 @@ header {
     font-family: Arial;
     color: white;
 }
+.x {
+    float: right;
+    background-color: lightgrey;
+    border: lightgrey;
+}
 h3 {
     text-align: left;
     margin: 0 0 10px 0;

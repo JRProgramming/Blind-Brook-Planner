@@ -11,19 +11,23 @@ function identifyTextField(text) {
          }
     })
 }
+var id = 0
 function createCheckBox(text) {
     if(document.getElementsByClassName("textField")[text].value != "") {
         var checkbox = document.createElement("input")
         checkbox.setAttribute("type", "checkbox")
-        var id = document.getElementsByClassName("cb" + text).length
         checkbox.setAttribute("class", "cb" + text)
+        checkbox.setAttribute("id", "cb" + id)
         checkbox.setAttribute("onclick", "checkBoxes(" + text + "," + id  + ")")
         var label = document.createElement("label")
-        label.innerHTML = document.getElementsByClassName("textField")[text].value + "<br>"
+        label.setAttribute("id", id)
+        label.innerHTML = document.getElementsByClassName("textField")[text].value + "<button class=\"x\" onclick=\"removeAssignment(" + text + ", " + id + ")\">x</button><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
         document.getElementsByClassName("textField")[text].value = "";
+        id += 1
     }
+    checkBoxes(text)
     localStorage.setItem(text, document.getElementsByClassName("homework")[text].innerHTML)
 }
 function checkBoxes(box, id) {
@@ -39,31 +43,41 @@ function checkBoxes(box, id) {
         allBoxesChecked = false
     }
     if(allBoxesChecked) {
-        var button = document.createElement("button")
-        button.innerHTML = "Remove"
-        button.setAttribute("style", "color: grey; background-color: lightgrey; border: solid lightgrey; display: inline; float: right;")
-        button.setAttribute("onclick", "removeHomework(" + box + ")")
-        document.getElementsByTagName("h3")[box].appendChild(button)
-    } else if(document.getElementsByTagName("h3")[box].contains(document.getElementsByTagName("button")[0])) {
-        document.getElementsByTagName("h3")[box].removeChild(document.getElementsByTagName("button")[0])
+        if(!document.getElementById("b" + box)) {
+            var button = document.createElement("button")
+            button.innerHTML = "Remove"
+            button.setAttribute("style", "color: grey; background-color: lightgrey; border: solid lightgrey; display: inline; float: right;")
+            button.setAttribute("id", "b" + box)
+            button.setAttribute("onclick", "removeHomework(" + box + ")")
+            document.getElementsByTagName("h3")[box].appendChild(button)
+        }
+    } else if(document.getElementById("b" + box)) {
+        document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
     }
     saveCheckBox(box, id)
 }
 function saveCheckBox(box, id) {
+    console.log(id)
     if(id != null) {
-       if(document.getElementsByClassName("cb" + box)[id].checked) {
-           document.getElementsByClassName("cb" + box)[id].setAttribute("checked", true)
+       if(document.getElementById("cb" + id).checked) {
+           document.getElementById("cb" + id).setAttribute("checked", true)
        } else {
-           document.getElementsByClassName("cb" + box)[id].removeAttribute("checked")
+           document.getElementById("cb" + id).removeAttribute("checked")
        }
        localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
+}
+function removeAssignment(box, id) {
+    document.getElementsByClassName("homework")[box].removeChild(document.getElementById(id))
+    document.getElementsByClassName("homework")[box].removeChild(document.getElementById("cb" + id))
+    localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
+    checkBoxes(box)
 }
 function removeHomework(box) {
     var homework = document.getElementsByClassName("homework")[box]
     while(homework.hasChildNodes()) {
         homework.removeChild(homework.firstChild)
     }
-    document.getElementsByTagName("h3")[box].removeChild(document.getElementsByTagName("h3")[box].lastChild)
+    document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
     localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
 }
