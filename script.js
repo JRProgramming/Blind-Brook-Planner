@@ -20,7 +20,7 @@ function createCheckBox(text) {
         checkbox.setAttribute("id", "cb" + id)
         checkbox.setAttribute("onclick", "checkBoxes(" + text + "," + id  + ")")
         var label = document.createElement("label")
-        var size = (document.getElementsByClassName("textField")[text].value.length - 1)
+        var size = document.getElementsByClassName("textField")[text].value.length
         label.innerHTML = "<input type=\"text\" class=\"homeworkLabel\" size=" + size + " value='" + document.getElementsByClassName("textField")[text].value + "'><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
