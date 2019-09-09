@@ -18,6 +18,12 @@ header {
     background-color: lightgrey;
     border: lightgrey;
 }
+.homeworkLabel {
+    display: inline-block !important;
+    width: 90% !important;
+    margin: 0 !important;
+    border-bottom: solid 1px lightgrey !important;
+}
 h3 {
     text-align: left;
     margin: 0 0 10px 0;
