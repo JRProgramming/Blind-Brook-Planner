@@ -20,11 +20,13 @@ function createCheckBox(text) {
         checkbox.setAttribute("id", "cb" + id)
         checkbox.setAttribute("onclick", "checkBoxes(" + text + "," + id  + ")")
         var label = document.createElement("label")
+        label.setAttribute("id", "l" + id)
         var size = document.getElementsByClassName("textField")[text].value.length
-        label.innerHTML = "<input type=\"text\" class=\"homeworkLabel\" size=" + size + " value='" + document.getElementsByClassName("textField")[text].value + "'><br>"
+        label.innerHTML = "<input type=\"text\" class=\"homeworkLabel\" id='i" + id + "' size=" + size + " value='" + document.getElementsByClassName("textField")[text].value + "'><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
         document.getElementsByClassName("textField")[text].value = "";
+        document.getElementById("i" + id).setAttribute("onkeyup", "removeAssignment(" + text + "," + id + ")")
         id += 1
     }
     checkBoxes(text)
@@ -66,6 +68,17 @@ function saveCheckBox(box, id) {
        localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
 }
+function removeAssignment(box, id) {
+    if(document.getElementById("i" + id).value == "") {
+        while(document.getElementById("l" + id).hasChildNodes()) {
+            document.getElementById("l" + id).removeChild(document.getElementById("l" + id).firstChild)
+        }
+        document.getElementsByClassName("homework")[box].removeChild(document.getElementById("cb" + id))
+        localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
+        checkBoxes(box)
+    }
+}
+
 function removeHomework(box) {
     var homework = document.getElementsByClassName("homework")[box]
     while(homework.hasChildNodes()) {
