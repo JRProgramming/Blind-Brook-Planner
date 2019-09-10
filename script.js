@@ -77,6 +77,7 @@ function removeAssignment(box, id) {
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
         checkBoxes(box)
     } else {
+        document.getElementById("i" + id).setAttribute("value", document.getElementById("i" + id).value)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
 }
