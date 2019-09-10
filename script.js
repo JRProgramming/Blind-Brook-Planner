@@ -84,6 +84,7 @@ function removeAssignment(box, id) {
         checkBoxes(box)
     } else {
         document.getElementById("i" + id).setAttribute("value", document.getElementById("i" + id).value)
+        document.getElementById("i" + id).setAttribute("size", document.getElementById("i" + id).value.length)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
 }
