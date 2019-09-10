@@ -11,8 +11,13 @@ function identifyTextField(text) {
          }
     })
 }
-var id = 0
 function createCheckBox(text) {
+    var id
+    if(localStorage.getItem("id")){
+        id = localStorage.getItem("id")
+    } else {
+        id = 0
+    }
     if(document.getElementsByClassName("textField")[text].value != "") {
         var checkbox = document.createElement("input")
         checkbox.setAttribute("type", "checkbox")
@@ -27,7 +32,8 @@ function createCheckBox(text) {
         document.getElementsByClassName("homework")[text].appendChild(label)
         document.getElementsByClassName("textField")[text].value = "";
         document.getElementById("i" + id).setAttribute("onkeyup", "removeAssignment(" + text + "," + id + ")")
-        id += 1
+        id ++
+        localStorage.setItem("id", id)
     }
     checkBoxes(text)
     localStorage.setItem(text, document.getElementsByClassName("homework")[text].innerHTML)
