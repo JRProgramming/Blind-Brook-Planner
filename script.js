@@ -1,4 +1,11 @@
 window.onload = function() {
+    if(localStorage.getItem("class")) {
+        document.getElementsByTagName("main")[0].innerHTML = localStorage.getItem("class")
+        window.document.title = localStorage.getItem("name") + "'s Planner"
+        document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
+    } else {
+        popUpDiv()
+    }
     for(var i=0;i<document.getElementsByClassName("homework").length; i++) {
         document.getElementsByClassName("homework")[i].innerHTML = localStorage.getItem(i)
         checkBoxes(i)
@@ -10,6 +17,16 @@ function identifyTextField(text) {
              createCheckBox(text)
          }
     })
+}
+function textEnter(event) {
+    if(event.keyCode == 13) {
+        addClass()
+    }
+}
+function nameEnter(event) {
+    if(event.keyCode == 13) {
+        registerName()
+    }
 }
 function createCheckBox(text) {
     var id
@@ -96,4 +113,51 @@ function removeHomework(box) {
     }
     document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
     localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
+}
+function popUpDiv(x) {
+    if(x) {
+        document.getElementById("x-popup").style.visibility = "visible"
+    }
+    if(localStorage.getItem("name")) {
+        document.getElementById("popup").style.visibility = "visible"
+        window.document.title = localStorage.getItem("name") + "'s Planner"
+        document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
+    } else {
+        document.getElementById("name-popup").style.visibility = "visible"
+    }
+    document.getElementById("popup-background").style.visibility = "visible"
+}
+function closePopUp() {
+    document.getElementById("popup").style.visibility = "hidden"
+    document.getElementById("popup-background").style.visibility = "hidden"
+    document.getElementById("x-popup").style.visibility = "hidden"
+}
+function registerName() {
+    localStorage.setItem("name", document.getElementById("name-Text").value)
+    document.getElementById("name-popup").style.visibility = "hidden"
+    window.document.title = document.getElementById("name-Text").value + "'s Planner"
+    document.getElementById("heading").innerHTML = document.getElementById("name-Text").value + "'s Planner"
+    popUpDiv()
+}
+function addClass() {
+    document.getElementById("popup").style.visibility = "hidden"
+    document.getElementById("popup-background").style.visibility = "hidden"
+    var div = document.createElement("div")
+    div.setAttribute("class", "class")
+    var h3 = document.createElement("h3")
+    h3.innerHTML = document.getElementById("classText").value
+    div.appendChild(h3)
+    var div2 = document.createElement("div")
+    div2.setAttribute("class", "homework")
+    div.appendChild(div2)
+    var numberOfTextfields = document.getElementsByClassName("textField").length
+    var textfield = document.createElement("input")
+    textfield.setAttribute("type", "text")
+    textfield.setAttribute("class", "textField")
+    textfield.setAttribute("placeholder", "New homework")
+    textfield.setAttribute("onkeyup", "identifyTextField(" + numberOfTextfields + ")")
+    div.appendChild(textfield)
+    document.getElementsByTagName("main")[0].appendChild(div)
+    localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
+    document.getElementById("classText").value = ""
 }
