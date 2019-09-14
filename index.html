@@ -2,51 +2,44 @@
 <html>
     <body>
         <head>
-            <title>Johnny's Planner</title>
+            <title>Blind Brook Planner</title>
             <link href="style.css" type="text/css" rel="stylesheet">
-            <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no,maximum-scale=1.0,minimum-scale=1.0">
+            <meta name="viewport" content="width=device-width">
         </head>
         <header>
-            <h1 class="heading">Johnny Ramirez's Planner</h1>
+            <h1 class="heading" id="heading">Blind Brook Planner</h1>
         </header>
         <main>
-            <div class="class">
-                <h3>Honors Algebra II/Trigonometry</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(0)" placeholder="New homework">
+            <div id="popup">
+                <div id="title-popup">
+                    <span style="font-weight: bold">Add a class</span>
+                </div>
+                <div id="x-div-popup">
+                    <button id="x-popup" onclick="closePopUp()">Cancel</buttton>
+                </div>
+                <div id="textfield-popup">
+                    <h4 id="label-popup">Type in the name of the class</h4>
+                    <input type="text" onkeyup="textEnter(event)" class="popup-text" id="classText" placeholder="Class Name">
+                </div>
+                <div id="bottom-popup">
+                    <button id="addClass" onclick="addClass()">Add class</button>
+                </div>
             </div>
-            <div class="class">
-                <h3>Honors Computer Science</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(1)" placeholder="New homework">
+            <div id="name-popup">
+                <div id="title-popup">
+                    <span style="font-weight: bold">Name</span>
+                </div>
+                <div id="textfield-popup">
+                    <h4 id="label-popup">Type in your first name</h4>
+                    <input type="text" onkeyup="nameEnter(event)" class="popup-text" id="name-Text" placeholder="First Name">
+                </div>
+                <div id="bottom-popup">
+                    <button id="addClass" onclick="registerName()">Add class</button>
+                </div>
             </div>
-            <div class="class">
-                <h3>English</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(2)" placeholder="New homework">
-            </div>
-            <div class="class">
-                <h3>Honors Chemistry</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(3)" placeholder="New homework">
-            </div>
-            <div class="class">
-                <h3>Honors Spanish</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(4)" placeholder="New homework">
-            </div>
-            <div class="class">
-                <h3>Global History</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(5)" placeholder="New homework">
-            </div>
-            <div class="class">
-                <h3>Others</h3>
-                <div class="homework"></div>
-                <input type="text" class="textField" onkeyup="identifyTextField(6)" placeholder="New homework">
-            </div>
+            <div id="popup-background"></div>
         </main>
-        <button id="plus">+</button>
+        <button id="plus" onclick="popUpDiv(1)">+</button>
         <script src="script.js" type="text/javascript"></script>
     </body>
 </html>
