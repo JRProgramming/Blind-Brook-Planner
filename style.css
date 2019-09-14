@@ -77,7 +77,6 @@ input[type="text"] {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: 17.361vw;
     padding: 10px;
     visibility: hidden;
@@ -90,7 +89,6 @@ input[type="text"] {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: 17.361vw;
     padding: 10px;
     visibility: hidden;
@@ -115,6 +113,11 @@ input[type="text"] {
 }
 #textfield-popup{
     padding: 0 10px;
+    margin-bottom: 20px;
+}
+#name-textfield-popup {
+    padding: 0 10px;
+    margin-bottom: 100px;
 }
 #title-popup {
     height: 20px;
