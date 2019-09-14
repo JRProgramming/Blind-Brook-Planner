@@ -10,6 +10,7 @@ window.onload = function() {
         document.getElementsByClassName("homework")[i].innerHTML = localStorage.getItem(i)
         checkBoxes(i)
     }
+    document.getElementById("x-popup").style.visibility = "hidden"
 }
 function identifyTextField(text) {
     document.getElementsByClassName("textField")[text].addEventListener("keyup", function(event) {
