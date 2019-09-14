@@ -10,6 +10,7 @@ window.onload = function() {
         document.getElementsByClassName("homework")[i].innerHTML = localStorage.getItem(i)
         checkBoxes(i)
     }
+    document.getElementById("x-popup").style.visibility = "hidden"
 }
 function identifyTextField(text) {
     document.getElementsByClassName("textField")[text].addEventListener("keyup", function(event) {
@@ -21,7 +22,6 @@ function identifyTextField(text) {
 function textEnter(event) {
     if(event.keyCode == 13) {
         addClass()
-        document.getElementById("x-popup").style.visibility = "hidden"
     }
 }
 function nameEnter(event) {
@@ -123,8 +123,10 @@ function popUpDiv(x) {
         document.getElementById("popup").style.visibility = "visible"
         window.document.title = localStorage.getItem("name") + "'s Planner"
         document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
+        document.getElementById("classText").autofocus
     } else {
         document.getElementById("name-popup").style.visibility = "visible"
+        document.getElementById("name-Text").autofocus
     }
     document.getElementById("popup-background").style.visibility = "visible"
 }
@@ -161,4 +163,5 @@ function addClass() {
     document.getElementsByTagName("main")[0].appendChild(div)
     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     document.getElementById("classText").value = ""
+    document.getElementById("x-popup").style.visibility = "hidden"
 }
