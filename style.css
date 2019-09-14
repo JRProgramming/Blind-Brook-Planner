@@ -50,3 +50,121 @@ input[type="text"] {
     line-height: 20px;
     font-size: 16px;
 }
+#plus {
+    width: 2em;
+    height: 2em;
+    outline: none;
+    line-height: normal;
+    border-radius: 100%;
+    background-color: blue;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 50px;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+#plus:hover {
+    background-color: #3498DB;
+    cursor: pointer;
+}
+#popup {
+    z-index: 11;
+    font-family: Arial;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 17.361vw;
+    padding: 10px;
+    visibility: hidden;
+}
+#name-popup {
+    z-index: 11;
+    font-family: Arial;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 17.361vw;
+    padding: 10px;
+    visibility: hidden;
+}
+#popup-background {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, 0.4);
+    visibility: hidden;
+}
+#bottom-popup{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+}
+#textfield-popup{
+    padding: 0 10px;
+}
+#title-popup {
+    height: 20px;
+    font-size: 20px;
+    color: black;
+    border-bottom: solid grey 1px;
+    padding: 10px;
+    margin: 10px;
+}
+#addClass {
+    width: 100%;
+    height: 60px;
+    background-color: blue;
+    box-sizing: border-box;
+    color: white;
+    outline: none;
+    font-size: 20px;
+}
+#label-popup {
+    padding: 5px 10px;
+    border-bottom: transparent;
+}
+#addClass:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+#addClass:active {
+    opacity: 0.7;
+}
+.popup-text {
+    border: transparent !important;
+    background-color: transparent !important;
+    outline: 0 !important;
+    width: 100% !important;
+    border-bottom: solid grey 1px !important;
+    padding-left: 10px !important;
+    line-height: 50px !important;
+    font-size: 20px !important;
+}
+#x-div-popup {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px 15px 0 0;
+}
+#x-popup {
+    width: 100%;
+    font-size: 1.5vw;
+    background-color: transparent;
+    border: transparent;
+    visibility: hidden;
+    cursor: pointer;
+}
