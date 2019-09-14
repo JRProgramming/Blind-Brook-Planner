@@ -57,6 +57,7 @@ input[type="text"] {
     line-height: normal;
     border-radius: 100%;
     background-color: blue;
+    border: transparent;
     position: fixed;
     bottom: 30px;
     right: 30px;
