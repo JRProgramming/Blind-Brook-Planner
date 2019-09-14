@@ -22,7 +22,6 @@ function identifyTextField(text) {
 function textEnter(event) {
     if(event.keyCode == 13) {
         addClass()
-        document.getElementById("x-popup").style.visibility = "hidden"
     }
 }
 function nameEnter(event) {
@@ -162,4 +161,5 @@ function addClass() {
     document.getElementsByTagName("main")[0].appendChild(div)
     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     document.getElementById("classText").value = ""
+    document.getElementById("x-popup").style.visibility = "hidden"
 }
