@@ -123,8 +123,10 @@ function popUpDiv(x) {
         document.getElementById("popup").style.visibility = "visible"
         window.document.title = localStorage.getItem("name") + "'s Planner"
         document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
+        document.getElementById("classText").autofocus
     } else {
         document.getElementById("name-popup").style.visibility = "visible"
+        document.getElementById("name-Text").autofocus
     }
     document.getElementById("popup-background").style.visibility = "visible"
 }
