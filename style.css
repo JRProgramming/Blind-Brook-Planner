@@ -51,8 +51,8 @@ input[type="text"] {
     font-size: 16px;
 }
 #plus {
-    width: 1.67vw;
-    height: 1.67vw;
+    width: 7.5vw;
+    height: 7.5vw;
     outline: none;
     line-height: normal;
     border-radius: 100%;
@@ -61,7 +61,7 @@ input[type="text"] {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    font-size: 50px;
+    font-size: 4.8vw;
     color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
