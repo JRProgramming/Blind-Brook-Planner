@@ -4,13 +4,15 @@
         <head>
             <title>Blind Brook Planner</title>
             <link href="style.css" type="text/css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <meta name="viewport" content="width=device-width">
         </head>
         <header>
             <h1 class="heading" id="heading">Blind Brook Planner</h1>
+            <button onclick="popMenu()" id="menu-bar"><i class="fa fa-bars"></i></button>
         </header>
         <main>
-            <div id="popup">
+            <div class="popup" id="popup">
                 <div id="title-popup">
                     <span style="font-weight: bold">Add a class</span>
                 </div>
@@ -21,24 +23,40 @@
                     <h4 id="label-popup">Type in the name of the class</h4>
                     <input type="text" onkeyup="textEnter(event)" class="popup-text" id="classText" placeholder="Class Name">
                 </div>
-                <div id="bottom-popup">
-                    <button id="addClass" onclick="addClass()">Add class</button>
-                </div>
+                <button id="addClass" onclick="addClass()">Add Class</button>
             </div>
-            <div id="name-popup">
+            <div class="popup" id="name-popup">
                 <div id="title-popup">
                     <span style="font-weight: bold">Name</span>
                 </div>
-                <div id="textfield-popup">
+                <div id="name-textfield-popup">
                     <h4 id="label-popup">Type in your first name</h4>
                     <input type="text" onkeyup="nameEnter(event)" class="popup-text" id="name-Text" placeholder="First Name">
                 </div>
                 <div id="bottom-popup">
-                    <button id="addClass" onclick="registerName()">Add class</button>
+                    <button id="addClass" onclick="registerName()">Enter</button>
                 </div>
             </div>
             <div id="popup-background"></div>
         </main>
+        <div class="popup" id="removeClass-popup">
+            <div id="title-popup">
+                <span style="font-weight: bold">Remove Class</span>
+            </div>
+            <div id="x-div-popup">
+                <button id="x-popup-removeClass" onclick="closePopUp()">Cancel</buttton>
+            </div>
+            <div id="checkbox-removeClass-popup"></div>
+            <div id="bottom-popup">
+                <button id="addClass" onclick="removeClasses()">Remove Class</button>
+            </div>
+        </div>
+        <div id="bar-setting">
+            <div id="top-menu">
+                <button id="cancel-menu" onclick="closeMenu()">Close</button>
+            </div>
+            <button id="removeClass-menu" onclick="removeClassPopup()">Remove class</button>
+        </div>
         <button id="plus" onclick="popUpDiv(1)">+</button>
         <script src="script.js" type="text/javascript"></script>
     </body>

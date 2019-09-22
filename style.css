@@ -12,6 +12,7 @@ header {
     margin: 0;
     font-family: Arial;
     color: white;
+    display: inline;
 }
 .x {
     float: right;
@@ -32,7 +33,7 @@ h3 {
 }
 .class {
     display: inline-block;
-    min-width: 200px;
+    min-width: 250px;
     background: lightgrey;
     margin: 20px 10px;
     padding: 10px;
@@ -51,16 +52,17 @@ input[type="text"] {
     font-size: 16px;
 }
 #plus {
-    width: 2em;
-    height: 2em;
+    width: 7.5vw;
+    height: 7.5vw;
     outline: none;
     line-height: normal;
     border-radius: 100%;
     background-color: blue;
+    border: transparent;
     position: fixed;
     bottom: 30px;
     right: 30px;
-    font-size: 50px;
+    font-size: 4.8vw;
     color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
@@ -69,7 +71,7 @@ input[type="text"] {
     background-color: #3498DB;
     cursor: pointer;
 }
-#popup {
+.popup {
     z-index: 11;
     font-family: Arial;
     background-color: white;
@@ -77,10 +79,16 @@ input[type="text"] {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: 17.361vw;
     padding: 10px;
     visibility: hidden;
+}
+.popup.animate-popup {
+    animation: popup 0.6s;
+}
+@keyframes popup {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
 }
 #name-popup {
     z-index: 11;
@@ -90,7 +98,6 @@ input[type="text"] {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: 17.361vw;
     padding: 10px;
     visibility: hidden;
@@ -115,7 +122,17 @@ input[type="text"] {
 }
 #textfield-popup{
     padding: 0 10px;
+    margin-bottom: 20px;
 }
+#name-textfield-popup {
+    padding: 0 10px;
+    margin-bottom: 100px;
+}
+#checkbox-removeClass-popup {
+    padding: 0 10px;
+    margin-bottom: 200px;
+}
+
 #title-popup {
     height: 20px;
     font-size: 20px;
@@ -127,6 +144,7 @@ input[type="text"] {
 #addClass {
     width: 100%;
     height: 60px;
+    border: transparent;
     background-color: blue;
     box-sizing: border-box;
     color: white;
@@ -136,6 +154,79 @@ input[type="text"] {
 #label-popup {
     padding: 5px 10px;
     border-bottom: transparent;
+}
+#menu-bar {
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    float: right;
+    color: white;
+    font-size: 30px;
+}
+input[type="checkbox"] {
+    vertical-align: top;
+    position: relative;
+    top: 15px;
+}
+textarea {
+    overflow: hidden;
+    position: relative;
+    top: 6px;
+    border: transparent;
+    background-color: transparent;
+    resize: none;
+    height: 25px;
+    padding-top: 5px;
+    vertical-align: sub;
+    outline: none;
+    font-size: 20px;
+}
+#bar-setting {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 13;
+    height: 100vh;
+    width: 40vh;
+    float: right;
+    background-color: lightgrey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    float: right;
+    visibility: hidden;
+}
+#top-menu {
+    padding: 20px 10px 30px;
+    margin: 0 10px;
+    border-bottom: solid grey 1px;
+}
+#cancel-menu {
+    float: right;
+    background-color: transparent;
+    font-family: Arial;
+    font-size: 16px;
+    color: black;
+    outline: none;
+    cursor: pointer;
+    border: transparent;
+}
+#bar-setting.animate-menu {
+    animation: barsetting 0.6s;
+}
+@keyframes barsetting {
+    from {
+        position: absolute;
+        right: -40vh;
+    }
+    to {
+        position: absolute;
+        right: 0vh;
+    }
+}
+.removeClassCB {
+    position: static !important;
+    vertical-align: default !important;
+    margin: 1.389vh 0 0 0;
 }
 #addClass:hover {
     opacity: 0.9;
@@ -154,6 +245,22 @@ input[type="text"] {
     line-height: 50px !important;
     font-size: 20px !important;
 }
+#removeClass-menu {
+    margin: 10px 0;
+    outline: none;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 16px;
+    border: transparent;
+    background-color: transparent;
+}
+#removeClass-menu:hover {
+    opacity: 0.6;
+}
+.removeCheckbox-label {
+    margin: 0 0 0 5px;
+    font-size: 2.78vh;
+}
 #x-div-popup {
     position: absolute;
     top: 0;
@@ -161,6 +268,14 @@ input[type="text"] {
     padding: 15px 15px 0 0;
 }
 #x-popup {
+    width: 100%;
+    font-size: 1.5vw;
+    background-color: transparent;
+    border: transparent;
+    visibility: hidden;
+    cursor: pointer;
+}
+#x-popup-removeClass {
     width: 100%;
     font-size: 1.5vw;
     background-color: transparent;
