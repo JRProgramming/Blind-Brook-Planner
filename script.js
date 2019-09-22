@@ -227,6 +227,7 @@ function addClass() {
     var div2 = document.createElement("div")
     div2.setAttribute("class", "homework")
     div.appendChild(div2)
+    var numberOfTextfields = document.getElementsByClassName("textField").length
     var textfield = document.createElement("input")
     textfield.setAttribute("type", "text")
     textfield.setAttribute("class", "textField")

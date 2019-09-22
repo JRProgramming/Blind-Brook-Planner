@@ -146,6 +146,7 @@ input[type="text"] {
     height: 60px;
     border: transparent;
     background-color: blue;
+    border: transparent;
     box-sizing: border-box;
     color: white;
     outline: none;
