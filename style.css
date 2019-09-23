@@ -80,6 +80,7 @@ input[type="text"] {
     left: 0;
     right: 0;
     margin: 17.361vw;
+    height: auto;
     padding: 10px;
     visibility: hidden;
 }
@@ -114,7 +115,7 @@ input[type="text"] {
 }
 #bottom-popup{
     text-align: center;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
@@ -126,13 +127,10 @@ input[type="text"] {
 }
 #name-textfield-popup {
     padding: 0 10px;
-    margin-bottom: 100px;
 }
 #checkbox-removeClass-popup {
     padding: 0 10px;
-    margin-bottom: 100px;
 }
-
 #title-popup {
     height: 20px;
     font-size: 20px;
