@@ -145,6 +145,7 @@ function popUpDiv(x) {
         }, 600)
         document.getElementById("name-Text").autofocus
     }
+    document.getElementById("bar-setting").style.visibility = "hidden"
     document.getElementById("popup-background").style.visibility = "visible"
 }
 function closePopUp() {

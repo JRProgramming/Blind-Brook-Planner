@@ -33,12 +33,16 @@ h3 {
 }
 .class {
     display: inline-block;
+    vertical-align: top;
     min-width: 250px;
     background: lightgrey;
     margin: 20px 10px;
     padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
     font-family: Arial;
+}
+.class:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 input[type="text"] {
     background-color: lightgrey;
@@ -75,12 +79,12 @@ input[type="text"] {
     z-index: 11;
     font-family: Arial;
     background-color: white;
+    transform: translateY(-50%);
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     right: 0;
-    margin: 17.361vw;
-    height: auto;
+    margin: 0 17.361vw;
     padding: 10px;
     visibility: hidden;
 }
@@ -88,20 +92,12 @@ input[type="text"] {
     animation: popup 0.6s;
 }
 @keyframes popup {
-    from {transform: scale(0)}
-    to {transform: scale(1)}
-}
-#name-popup {
-    z-index: 11;
-    font-family: Arial;
-    background-color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 17.361vw;
-    padding: 10px;
-    visibility: hidden;
+    from {
+        transform: translateY(-50%) scale(0)
+    }
+    to {
+        transform: translateY(-50%) scale(1)
+    }
 }
 #popup-background {
     z-index: 10;
@@ -160,6 +156,7 @@ input[type="text"] {
     cursor: pointer;
     float: right;
     color: white;
+    outline: none;
     font-size: 30px;
 }
 input[type="checkbox"] {
@@ -181,7 +178,7 @@ textarea {
     font-size: 20px;
 }
 #bar-setting {
-    text-align: center;
+    text-align: center !important;
     position: absolute;
     right: 0;
     top: 0;
@@ -244,8 +241,7 @@ textarea {
     line-height: 50px !important;
     font-size: 20px !important;
 }
-#removeClass-menu {
-    margin: 10px 0;
+.menuItems {
     outline: none;
     cursor: pointer;
     padding: 15px;
