@@ -31,6 +31,9 @@ h3 {
     padding-bottom: 5px;
     border-bottom: solid grey 1px;
 }
+#aHeader {
+    text-decoration: none;
+}
 .class {
     display: inline-block;
     vertical-align: top;
