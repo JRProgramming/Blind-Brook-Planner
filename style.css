@@ -20,14 +20,24 @@ header {
     border: transparent;
 }
 .homeworkLabel {
-    display: inline-block !important;
-    width: 90% !important;
-    margin: 0 !important;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    top: -4px;
+    border: none;
+    background-color: transparent;
+    padding-top: 0;
+    max-width: 93%;
+    vertical-align: super !important;
+    cursor: text;
+    outline: none;
+    font-size: 20px;
 }
 h3 {
     text-align: left;
     margin: 0 0 10px 0;
     padding-bottom: 5px;
+    white-space: nowrap;
     border-bottom: solid black 1px;
 }
 #aHeader {
@@ -44,6 +54,7 @@ span {
     overflow: auto;
     vertical-align: top;
     min-width: 275px;
+    height: auto;
     background-color: rgb(211,211,211);
     margin: 20px 10px;
     padding: 10px;
@@ -179,18 +190,6 @@ input[type="text"] {
 }
 input[type="checkbox"] {
     vertical-align: top;
-}
-textarea {
-    overflow: hidden !important;
-    position: relative;
-    top: -10px;
-    border: none;
-    background-color: transparent;
-    resize: none;
-    padding-top: 5px;
-    vertical-align: sub;
-    outline: none;
-    font-size: 20px;
 }
 #bar-setting {
     text-align: center !important;
