@@ -16,47 +16,61 @@ header {
 }
 .x {
     float: right;
-    background-color: lightgrey;
-    border: lightgrey;
+    background-color: transparent;
+    border: transparent;
 }
 .homeworkLabel {
     display: inline-block !important;
     width: 90% !important;
     margin: 0 !important;
-    border-bottom: solid 1px lightgrey !important;
 }
 h3 {
     text-align: left;
     margin: 0 0 10px 0;
     padding-bottom: 5px;
-    border-bottom: solid grey 1px;
+    border-bottom: solid black 1px;
 }
 #aHeader {
     text-decoration: none;
 }
+span {
+    font-weight: bold;
+}
 .class {
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: relative;
     display: inline-block;
+    overflow: auto;
     vertical-align: top;
-    min-width: 250px;
-    background: lightgrey;
+    min-width: 275px;
+    background-color: rgb(211,211,211);
     margin: 20px 10px;
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
     font-family: Arial;
 }
 .class:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.24);
+}
+.divText {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
 }
 input[type="text"] {
-    background-color: lightgrey;
-    border: lightgrey 0;
+    background-color: transparent;
+    border: none;
     outline: 0;
     width: 100%;
-    border-bottom: solid grey 1px;
-    margin-top: 20px;
+    border-bottom: solid black 1px;
     padding-bottom: 3px;
     line-height: 20px;
     font-size: 16px;
+}
+.homework {
+    margin-bottom: 35px;
 }
 #plus {
     width: 7.5vw;
@@ -83,7 +97,7 @@ input[type="text"] {
     font-family: Arial;
     background-color: white;
     transform: translateY(-50%);
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 0;
     right: 0;
@@ -104,7 +118,7 @@ input[type="text"] {
 }
 #popup-background {
     z-index: 10;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -120,9 +134,10 @@ input[type="text"] {
     right: 0;
     padding: 15px;
 }
-#textfield-popup{
+#div-popup{
     padding: 0 10px;
     margin-bottom: 20px;
+    margin-right: 15px;
 }
 #name-textfield-popup {
     padding: 0 10px;
@@ -164,17 +179,14 @@ input[type="text"] {
 }
 input[type="checkbox"] {
     vertical-align: top;
-    position: relative;
-    top: 15px;
 }
 textarea {
-    overflow: hidden;
+    overflow: hidden !important;
     position: relative;
-    top: 6px;
-    border: transparent;
+    top: -10px;
+    border: none;
     background-color: transparent;
     resize: none;
-    height: 25px;
     padding-top: 5px;
     vertical-align: sub;
     outline: none;
@@ -182,7 +194,7 @@ textarea {
 }
 #bar-setting {
     text-align: center !important;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     z-index: 13;
@@ -209,6 +221,9 @@ textarea {
     cursor: pointer;
     border: transparent;
 }
+#cancel-menu:hover{
+    opacity: 0.6;
+}
 #bar-setting.animate-menu {
     animation: barsetting 0.6s;
 }
@@ -224,7 +239,7 @@ textarea {
 }
 .removeClassCB {
     position: static !important;
-    vertical-align: default !important;
+    vertical-align: top !important;
     margin: 1.389vh 0 0 0;
 }
 #addClass:hover {
@@ -244,19 +259,38 @@ textarea {
     line-height: 50px !important;
     font-size: 20px !important;
 }
+#menu-options {
+    margin-top: 10px;
+}
 .menuItems {
     outline: none;
     cursor: pointer;
-    padding: 15px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 20px;
     border: transparent;
     background-color: transparent;
+}
+.menuItems:hover {
+    opacity: 0.6;
 }
 #removeClass-menu:hover {
     opacity: 0.6;
 }
+input[type="color"] {
+    border: transparent;
+    outline: none;
+    cursor: pointer;
+}
 .removeCheckbox-label {
+    position: relative;
+    top: 1px;
     margin: 0 0 0 5px;
+    font-size: 2.78vh;
+}
+.changeColor-label {
+    position: relative;
+    top: 9px;
+    margin: 0 0 0 3px;
     font-size: 2.78vh;
 }
 #x-div-popup {
@@ -270,14 +304,6 @@ textarea {
     font-size: 1.5vw;
     background-color: transparent;
     border: transparent;
-    visibility: hidden;
     cursor: pointer;
-}
-#x-popup-removeClass {
-    width: 100%;
-    font-size: 1.5vw;
-    background-color: transparent;
-    border: transparent;
-    visibility: hidden;
-    cursor: pointer;
+    outline: none;
 }
