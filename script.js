@@ -119,6 +119,7 @@ function checkBoxes(box, id, loop) {
                     button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
+                    button.style.width = "72px"
                     document.getElementsByTagName("h3")[box].appendChild(button)
                     document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
                 }
@@ -146,6 +147,7 @@ function checkBoxes(box, id, loop) {
                 button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
+                button.style.width = "72px"
                 document.getElementsByTagName("h3")[box].appendChild(button)
                 document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
             }
