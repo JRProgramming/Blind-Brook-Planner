@@ -119,11 +119,11 @@ function checkBoxes(box, id, loop) {
                     button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    document.getElementsByClassName("class")[box].style.maxWidth = (document.getElementsByClassName("class")[box].offsetWidth + 83) + "px"
                     document.getElementsByTagName("h3")[box].appendChild(button)
+                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
                 }
             } else if(document.getElementById("b" + box)) {
-                document.getElementsByClassName("class")[box].style.maxWidth = (document.getElementsByClassName("class")[box].offsetWidth - 82) + "px"
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
                 document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
             }
         }
@@ -146,11 +146,11 @@ function checkBoxes(box, id, loop) {
                 button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
-                document.getElementsByClassName("class")[box].style.maxWidth = (document.getElementsByClassName("class")[box].offsetWidth + 83) + "px"
                 document.getElementsByTagName("h3")[box].appendChild(button)
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
             }
         } else if(document.getElementById("b" + box)) {
-            document.getElementsByClassName("class")[box].style.maxWidth = (document.getElementsByClassName("class")[box].offsetWidth - 82) + "px"
+            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
             document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
@@ -201,6 +201,7 @@ function removeHomework(box) {
     while(homework.hasChildNodes()) {
         homework.removeChild(homework.firstChild)
     }
+    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
     document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
     updateScrollHeight(box)
     localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
