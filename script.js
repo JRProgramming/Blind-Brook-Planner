@@ -241,7 +241,7 @@ function popUpDiv(popUpName) {
             var h3 = document.getElementsByTagName("h3")
             for(i=0;i< document.getElementsByClassName("class").length;i++) {
                 if(document.getElementById("b" + i)) {
-                    document.getElementsByClassName("class")[i].style.maxWidth = (document.getElementsByClassName("class")[i].offsetWidth - 82) + "px"
+                    document.getElementsByClassName("class")[i].style.maxWidth = (Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) - document.getElementById("b" + i).clientWidth - 11) + "px"
                     document.getElementsByTagName("h3")[i].removeChild(document.getElementById("b" + i))
                 }
             }
