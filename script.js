@@ -47,11 +47,14 @@ function createCheckBox(text) {
         var label = document.createElement("label")
         label.setAttribute("id", "l" + id)
         var size = document.getElementsByClassName("textField")[text].value.length
-        label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'>" + document.getElementsByClassName("textField")[text].value + "</p><br>"
+        label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'></p><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
         document.getElementsByClassName("textField")[text].value = ""
         var p = document.getElementById("i" + id)
+        var homeworkTitle = document.createTextNode(document.getElementsByClassName("textField")[text].value)
+        p.appendChild(homeworkTitle)
+        document.getElementsByClassName("textField")[text].value = "";
         p.setAttribute("onkeyup", "removeAssignment(" + text + "," + id + ")")
         id ++
         localStorage.setItem("id", id)
@@ -116,15 +119,16 @@ function checkBoxes(box, id, loop) {
                 if(!document.getElementById("b" + box)) {
                     var button = document.createElement("button")
                     button.innerHTML = "Remove"
-                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    document.getElementsByTagName("h3")[box].appendChild(button)
-                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
+                    button.style.width = "72px"
+                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px;")
+                    document.getElementsByClassName("titleDiv")[box].appendChild(button)
                 }
             } else if(document.getElementById("b" + box)) {
                 document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
-                document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
+                document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
     } else {
@@ -143,15 +147,16 @@ function checkBoxes(box, id, loop) {
             if(!document.getElementById("b" + box)) {
                 var button = document.createElement("button")
                 button.innerHTML = "Remove"
-                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline; float: right; font-size: 16px; cursor: pointer; margin-left: 10px;")
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
-                document.getElementsByTagName("h3")[box].appendChild(button)
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + button.clientWidth + 11) + "px"
+                button.style.width = "72px"
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px;")
+                document.getElementsByClassName("titleDiv")[box].appendChild(button)
             }
         } else if(document.getElementById("b" + box)) {
             document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
-            document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
+            document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
         saveCheckBox(box, id)
@@ -197,9 +202,15 @@ function removeAssignment(box, id) {
     }
 }
 function removeHomework(box) {
-    var homework = document.getElementsByClassName("homework")[box]
-    while(homework.hasChildNodes()) {
-        homework.removeChild(homework.firstChild)
+    if(confirm("Are you sure you want to remove all of your homeworks for " + document.getElementsByTagName("h3")[box].childNodes[0].nodeValue + "?")) {
+        var homework = document.getElementsByClassName("homework")[box]
+        while(homework.hasChildNodes()) {
+            homework.removeChild(homework.firstChild)
+        }
+        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
+        document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
+        updateScrollHeight(box)
+        localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
     document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
     document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
@@ -241,8 +252,8 @@ function popUpDiv(popUpName) {
             var h3 = document.getElementsByTagName("h3")
             for(i=0;i< document.getElementsByClassName("class").length;i++) {
                 if(document.getElementById("b" + i)) {
-                    document.getElementsByClassName("class")[i].style.maxWidth = (document.getElementsByClassName("class")[i].offsetWidth - 82) + "px"
-                    document.getElementsByTagName("h3")[i].removeChild(document.getElementById("b" + i))
+                    document.getElementsByClassName("class")[i].style.maxWidth = (Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) - document.getElementById("b" + i).clientWidth - 11) + "px"
+                    document.getElementsByClassName("titleDiv")[i].removeChild(document.getElementById("b" + i))
                 }
             }
             for(i=0; i<h3.length; i++) {
@@ -252,7 +263,7 @@ function popUpDiv(popUpName) {
                 checkbox.setAttribute("class", "removeClassCB")
                 var label = document.createElement("label")
                 label.setAttribute("class", "removeCheckbox-label")
-                label.innerHTML = h3[i].innerHTML + "<br>"
+                label.innerHTML = h3[i].childNodes[0].nodeValue + "<br>"
                 document.getElementById("div-popup").appendChild(checkbox)
                 document.getElementById("div-popup").appendChild(label)
             }
@@ -275,7 +286,7 @@ function popUpDiv(popUpName) {
                 color.setAttribute("value", rgb2hex(document.getElementsByClassName("class")[i].style.backgroundColor))
                 var label = document.createElement("label")
                 label.setAttribute("class", "changeColor-label")
-                label.innerHTML = h3[i].innerHTML + "<br>"
+                label.innerHTML = h3[i].childNodes[0].nodeValue + "<br>"
                 document.getElementById("div-popup").appendChild(color)
                 document.getElementById("div-popup").appendChild(label)
             }
@@ -356,7 +367,7 @@ function removeClasses() {
         var checkBoxes = []
         for(i=0;i<document.getElementsByTagName("h3").length;i++) {
             if(document.getElementById("dc" + i).checked) {
-                checkBoxes.push(document.getElementsByTagName("h3")[i].innerHTML)
+                checkBoxes.push(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue)
             }
         }
         var elements = []
@@ -364,11 +375,15 @@ function removeClasses() {
             for(i=0;i<document.getElementsByClassName("class").length;i++) {
                 if(document.getElementsByClassName("class")[i].innerHTML.includes("<h3>" + checkBoxes[j] + "</h3>")) {
                     elements.push(document.getElementsByClassName("class")[i])
+                    localStorage.setItem(i, "")
                 }
             }
         }
         for(i=0;i<elements.length;i++) {
             document.getElementsByTagName("main")[0].removeChild(elements[i])
+        }
+        for(i=0;i<document.getElementsByClassName("textField").length;i++) {
+            document.getElementsByClassName("textField")[i].setAttribute("onkeyup", "identifyTextField(" + i + ")")
         }
         closePopUp()
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
@@ -388,7 +403,7 @@ function addClass() {
     }
     document.getElementById("classText").value = document.getElementById("classText").value.trim()
     for(i=0;i<document.getElementsByTagName("h3").length; i++) {
-        if(document.getElementsByTagName("h3")[i].innerHTML == document.getElementById("classText").value) {
+        if(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue == document.getElementById("classText").value) {
             acceptableClassTitle = "sameClass"
         }
     }
@@ -400,9 +415,13 @@ function addClass() {
         document.getElementById("popup-background").style.visibility = "hidden"
         var div = document.createElement("div")
         div.setAttribute("class", "class")
+        var titleDiv = document.createElement("div")
+        titleDiv.setAttribute("class", "titleDiv")
         var h3 = document.createElement("h3")
-        h3.innerHTML = document.getElementById("classText").value
-        div.appendChild(h3)
+        var classTitle = document.createTextNode(document.getElementById("classText").value)
+        h3.appendChild(classTitle)
+        titleDiv.appendChild(h3)
+        div.appendChild(titleDiv)
         var div2 = document.createElement("div")
         div2.setAttribute("class", "homework")
         div.appendChild(div2)
