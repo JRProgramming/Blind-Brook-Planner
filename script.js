@@ -372,6 +372,9 @@ function removeClasses() {
         for(i=0;i<elements.length;i++) {
             document.getElementsByTagName("main")[0].removeChild(elements[i])
         }
+        for(i=0;i<document.getElementsByClassName("textField").length;i++) {
+            document.getElementsByClassName("textField")[i].setAttribute("onkeyup", "identifyTextField(" + i + ")")
+        }
         closePopUp()
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     }
