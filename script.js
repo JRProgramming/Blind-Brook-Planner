@@ -50,7 +50,7 @@ function createCheckBox(text) {
         label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'>" + document.getElementsByClassName("textField")[text].value + "</p><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
-        document.getElementsByClassName("textField")[text].value = "";
+        document.getElementsByClassName("textField")[text].value = ""
         var p = document.getElementById("i" + id)
         p.setAttribute("onkeyup", "removeAssignment(" + text + "," + id + ")")
         id ++
@@ -79,7 +79,7 @@ function activateResize() {
 }
 function updateScrollHeight(text) {
     if(text) {
-        const classHW = document.getElementsByClassName("class")[text];
+        const classHW = document.getElementsByClassName("class")[text]
         const expandedHeight = classHW.style.height
         classHW.style.height = "auto"
         classHW.style.minHeight = 0
@@ -88,7 +88,7 @@ function updateScrollHeight(text) {
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     } else {
         for(i=0;i<document.getElementsByClassName("class").length;i++) {
-            const classHW = document.getElementsByClassName("class")[i];
+            const classHW = document.getElementsByClassName("class")[i]
             const expandedHeight = classHW.style.height
             classHW.style.height = "auto"
             classHW.style.minHeight = 0
@@ -164,7 +164,7 @@ function changeColorPopUp() {
     document.getElementById("popup-background").style.visibility = "visible"
     document.getElementsByClassName("popup")[3].classList.add("animate-popup")
     setTimeout(function() {
-        document.getElementsByClassName("popup")[3].classList.remove("animate-popup");
+        document.getElementsByClassName("popup")[3].classList.remove("animate-popup")
     }, 600)
 }
 function changeColor() {
@@ -225,7 +225,7 @@ function popUpDiv(popUpName) {
             document.getElementById("popup").style.visibility = "visible"
             document.getElementById("popup").classList.add("animate-popup")
             setTimeout(function() {
-                document.getElementById("popup").classList.remove("animate-popup");
+                document.getElementById("popup").classList.remove("animate-popup")
             }, 600)
             window.document.title = localStorage.getItem("name") + "'s Planner"
             document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
@@ -236,7 +236,7 @@ function popUpDiv(popUpName) {
             }
             document.getElementById("popup").classList.add("animate-popup")
             setTimeout(function() {
-                document.getElementById("popup").classList.remove("animate-popup");
+                document.getElementById("popup").classList.remove("animate-popup")
             }, 600)
             var h3 = document.getElementsByTagName("h3")
             for(i=0;i< document.getElementsByClassName("class").length;i++) {
@@ -263,7 +263,7 @@ function popUpDiv(popUpName) {
             }
             document.getElementById("popup").classList.add("animate-popup")
             setTimeout(function() {
-                document.getElementById("popup").classList.remove("animate-popup");
+                document.getElementById("popup").classList.remove("animate-popup")
             }, 600)
             var h3 = document.getElementsByTagName("h3")
             for(i=0; i<h3.length; i++) {
@@ -287,14 +287,14 @@ function popUpDiv(popUpName) {
         }
         document.getElementById("popup").classList.add("animate-popup")
         setTimeout(function() {
-                   document.getElementById("popup").classList.remove("animate-popup");
+            document.getElementById("popup").classList.remove("animate-popup")
         }, 600)
         document.getElementById("name-Text").autofocus
     }
     document.getElementById("bar-setting").style.visibility = "hidden"
     document.getElementById("popup-background").style.visibility = "visible"
 }
-var originalColors = [];
+var originalColors = []
 function getOriginalColor() {
     originalColors = []
     for(i=0;i<document.getElementsByClassName("class").length;i++) {
@@ -337,16 +337,16 @@ function popMenu() {
     }, 600)
 }
 function rgb2hex(rgb) {
-    if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
+    if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb
     
-    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
     function hex(x) {
-        return ("0" + parseInt(x).toString(16)).slice(-2);
+        return ("0" + parseInt(x).toString(16)).slice(-2)
     }
     if(rgb == null) {
         return "#D3D3D3"
     }
-    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])
 }
 function closeMenu() {
     document.getElementById("bar-setting").style.visibility = "hidden"
