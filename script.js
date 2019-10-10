@@ -126,7 +126,7 @@ function checkBoxes(box, id, loop) {
                     document.getElementsByClassName("titleDiv")[box].appendChild(button)
                 }
             } else if(document.getElementById("b" + box)) {
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(button.style.width.slice(0, -2)) + 11) + "px"
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
                 document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
@@ -154,7 +154,7 @@ function checkBoxes(box, id, loop) {
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
             }
         } else if(document.getElementById("b" + box)) {
-            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(button.style.width.slice(0, -2)) + 11) + "px"
+            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
             document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
