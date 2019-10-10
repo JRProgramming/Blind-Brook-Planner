@@ -281,7 +281,7 @@ function popUpDiv(popUpName) {
                 color.setAttribute("value", rgb2hex(document.getElementsByClassName("class")[i].style.backgroundColor))
                 var label = document.createElement("label")
                 label.setAttribute("class", "changeColor-label")
-                label.innerHTML = h3[i].innerHTML + "<br>"
+                label.innerHTML = h3[i].childNodes[0].nodeValue + "<br>"
                 document.getElementById("div-popup").appendChild(color)
                 document.getElementById("div-popup").appendChild(label)
             }
