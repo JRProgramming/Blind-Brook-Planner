@@ -258,7 +258,7 @@ function popUpDiv(popUpName) {
                 checkbox.setAttribute("class", "removeClassCB")
                 var label = document.createElement("label")
                 label.setAttribute("class", "removeCheckbox-label")
-                label.innerHTML = h3[i].innerHTML + "<br>"
+                label.innerHTML = h3[i].childNodes[0].nodeValue + "<br>"
                 document.getElementById("div-popup").appendChild(checkbox)
                 document.getElementById("div-popup").appendChild(label)
             }
