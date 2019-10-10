@@ -50,11 +50,10 @@ function createCheckBox(text) {
         label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'></p><br>"
         document.getElementsByClassName("homework")[text].appendChild(checkbox)
         document.getElementsByClassName("homework")[text].appendChild(label)
-        document.getElementsByClassName("textField")[text].value = ""
         var p = document.getElementById("i" + id)
         var homeworkTitle = document.createTextNode(document.getElementsByClassName("textField")[text].value)
         p.appendChild(homeworkTitle)
-        document.getElementsByClassName("textField")[text].value = "";
+        document.getElementsByClassName("textField")[text].value = ""
         p.setAttribute("onkeyup", "removeAssignment(" + text + "," + id + ")")
         id ++
         localStorage.setItem("id", id)
@@ -127,7 +126,7 @@ function checkBoxes(box, id, loop) {
                     document.getElementsByClassName("titleDiv")[box].appendChild(button)
                 }
             } else if(document.getElementById("b" + box)) {
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(button.style.width.slice(0, -2)) + 11) + "px"
                 document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
@@ -155,7 +154,7 @@ function checkBoxes(box, id, loop) {
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
             }
         } else if(document.getElementById("b" + box)) {
-            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
+            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(button.style.width.slice(0, -2)) + 11) + "px"
             document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
@@ -207,15 +206,11 @@ function removeHomework(box) {
         while(homework.hasChildNodes()) {
             homework.removeChild(homework.firstChild)
         }
-        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
+        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
         document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         updateScrollHeight(box)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
-    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - document.getElementById("b" + box).clientWidth - 11) + "px"
-    document.getElementsByTagName("h3")[box].removeChild(document.getElementById("b" + box))
-    updateScrollHeight(box)
-    localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
 }
 var ids = ["title-popup", "x-div-popup", "div-popup", "bottom-popup"]
 var addClassChilds = ["<span>Add a class</span>", "<button id=\"x-popup\" onclick=\"closePopUp()\">Cancel</buttton>", "<h4 id=\"label-popup\">Type in the name of the class</h4><input type=\"text\" onkeyup=\"textEnter(event)\" class=\"popup-text\" id=\"classText\" placeholder=\"Class Name\">", "<button id=\"addClass\" onclick=\"addClass()\">Add Class</button>"]
@@ -461,4 +456,4 @@ function addClass() {
         document.getElementById("classText").value = ""
         document.getElementById("div-popup").appendChild(error)
     }
-} 
+}
