@@ -461,4 +461,4 @@ function addClass() {
         document.getElementById("classText").value = ""
         document.getElementById("div-popup").appendChild(error)
     }
-}
+} 
