@@ -120,13 +120,12 @@ function checkBoxes(box, id, loop) {
                     button.innerHTML = "Remove"
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    button.style.width = "72px"
-                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
-                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px;")
+                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
                     document.getElementsByClassName("titleDiv")[box].appendChild(button)
+                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
                 }
             } else if(document.getElementById("b" + box)) {
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
                 document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
@@ -148,13 +147,12 @@ function checkBoxes(box, id, loop) {
                 button.innerHTML = "Remove"
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
-                button.style.width = "72px"
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
-                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px;")
+                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
+                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
             }
         } else if(document.getElementById("b" + box)) {
-            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
+            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
             document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
@@ -206,7 +204,7 @@ function removeHomework(box) {
         while(homework.hasChildNodes()) {
             homework.removeChild(homework.firstChild)
         }
-        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0, -2)) + 11) + "px"
+        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
         document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         updateScrollHeight(box)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
