@@ -40,6 +40,17 @@ h3 {
     padding-bottom: 5px;
     white-space: nowrap;
 }
+.removeButton {
+    color: black;
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    float: right;
+    cursor: pointer;
+    margin-left: 10px;
+    width: 72px;
+}
 #aHeader {
     text-decoration: none;
 }

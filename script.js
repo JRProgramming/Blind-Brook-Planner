@@ -120,9 +120,10 @@ function checkBoxes(box, id, loop) {
                     button.innerHTML = "Remove"
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
+                    button.setAttribute("class", "removeButton")
+                    button.setAttribute("style", "width: 72px;")
                     document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                    if(document.getElementById("b" + box).offsetTop != 10) {
+                    if(document.getElementById("b" + box).offsetTop > 25) {
                          document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
                     }
                 }
@@ -152,9 +153,10 @@ function checkBoxes(box, id, loop) {
                 button.innerHTML = "Remove"
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
-                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
+                button.setAttribute("class", "removeButton")
+                button.setAttribute("style", "width: 72px;")
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                if(document.getElementById("b" + box).offsetTop != 10) {
+                if(document.getElementById("b" + box).offsetTop > 25) {
                      document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
                 }
             }
