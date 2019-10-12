@@ -120,12 +120,18 @@ function checkBoxes(box, id, loop) {
                     button.innerHTML = "Remove"
                     button.setAttribute("id", "b" + box)
                     button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
+                    button.setAttribute("class", "removeButton")
+                    button.setAttribute("style", "width: 72px;")
                     document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                    document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                    if(document.getElementById("b" + box).offsetTop > 25) {
+                         document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                    }
                 }
             } else if(document.getElementById("b" + box)) {
                 document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
+                if(Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[box].clientWidth) {
+                    document.getElementsByClassName("class")[box].style.maxWidth = document.getElementsByClassName("class")[box].clientWidth + "px"
+                }
                 document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
@@ -147,12 +153,18 @@ function checkBoxes(box, id, loop) {
                 button.innerHTML = "Remove"
                 button.setAttribute("id", "b" + box)
                 button.setAttribute("onclick", "removeHomework(" + box + ")")
-                button.setAttribute("style", "color: black; background-color: transparent; border: none; display: inline-block; font-size: 16px; float: right; cursor: pointer; margin-left: 10px; width: 72px;")
+                button.setAttribute("class", "removeButton")
+                button.setAttribute("style", "width: 72px;")
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                if(document.getElementById("b" + box).offsetTop > 25) {
+                     document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                }
             }
         } else if(document.getElementById("b" + box)) {
             document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
+            if(Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[box].clientWidth) {
+                document.getElementsByClassName("class")[box].style.maxWidth = document.getElementsByClassName("class")[box].clientWidth + "px"
+            }
             document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
         updateScrollHeight(box)
@@ -245,7 +257,10 @@ function popUpDiv(popUpName) {
             var h3 = document.getElementsByTagName("h3")
             for(i=0;i< document.getElementsByClassName("class").length;i++) {
                 if(document.getElementById("b" + i)) {
-                    document.getElementsByClassName("class")[i].style.maxWidth = (Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) - document.getElementById("b" + i).clientWidth - 11) + "px"
+                    document.getElementsByClassName("class")[i].style.maxWidth = (Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + i).style.width.slice(0,-2)) - 11) + "px"
+                    if(Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[i].clientWidth) {
+                        document.getElementsByClassName("class")[i].style.maxWidth = document.getElementsByClassName("class")[i].clientWidth + "px"
+                    }
                     document.getElementsByClassName("titleDiv")[i].removeChild(document.getElementById("b" + i))
                 }
             }
@@ -256,7 +271,10 @@ function popUpDiv(popUpName) {
                 checkbox.setAttribute("class", "removeClassCB")
                 var label = document.createElement("label")
                 label.setAttribute("class", "removeCheckbox-label")
-                label.innerHTML = h3[i].childNodes[0].nodeValue + "<br>"
+                var labelText = document.createTextNode(h3[i].childNodes[0].nodeValue)
+                label.appendChild(labelText)
+                var br = document.createElement("br")
+                label.appendChild(br)
                 document.getElementById("div-popup").appendChild(checkbox)
                 document.getElementById("div-popup").appendChild(label)
             }
@@ -365,8 +383,8 @@ function removeClasses() {
         }
         var elements = []
         for(j=0;j<checkBoxes.length;j++) {
-            for(i=0;i<document.getElementsByClassName("class").length;i++) {
-                if(document.getElementsByClassName("class")[i].innerHTML.includes("<h3>" + checkBoxes[j] + "</h3>")) {
+            for(i=0;i<document.getElementsByTagName("h3").length;i++) {
+                if(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue == checkBoxes[j]) {
                     elements.push(document.getElementsByClassName("class")[i])
                     localStorage.setItem(i, "")
                 }
