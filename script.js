@@ -1,6 +1,13 @@
 window.onload = function() {
     if(localStorage.getItem("class")) {
         document.getElementsByTagName("main")[0].innerHTML = localStorage.getItem("class")
+        for(j=0;j<document.getElementsByClassName("titleDiv").length;j++) {
+            for(i=0;i<document.getElementsByClassName("titleDiv")[j].childNodes.length;i++) {
+                if(document.getElementsByClassName("titleDiv")[j].childNodes[1] && document.getElementsByClassName("titleDiv")[j].childNodes[1].innerHTML == "Undo") {
+                    document.getElementsByClassName("titleDiv")[j].removeChild(document.getElementsByClassName("titleDiv")[j].childNodes[1])
+                }
+            }
+        }
         window.document.title = localStorage.getItem("name") + "'s Planner"
         document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
     } else {
@@ -100,75 +107,64 @@ function updateScrollHeight(text) {
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     }
 }
-function checkBoxes(box, id, loop) {
-    if(loop) {
-        for(box=0;box<document.getElementsByClassName("class").length;box++) {
-            var allBoxesChecked = true
-            var checkBoxes = document.getElementsByClassName("cb" + box)
-            if(checkBoxes.length != 0) {
-                for(j=0;j<checkBoxes.length; j++) {
-                    if(!checkBoxes[j].checked) {
-                        allBoxesChecked = false
-                    }
-                }
-            } else {
+function checkForRemoveButton(box) {
+    var allBoxesChecked = true
+    var checkBoxes = document.getElementsByClassName("cb" + box)
+    if(checkBoxes.length != 0) {
+        for(j=0;j<checkBoxes.length; j++) {
+            if(!checkBoxes[j].checked) {
                 allBoxesChecked = false
-            }
-            if(allBoxesChecked) {
-                if(!document.getElementById("b" + box)) {
-                    var button = document.createElement("button")
-                    button.innerHTML = "Remove"
-                    button.setAttribute("id", "b" + box)
-                    button.setAttribute("onclick", "removeHomework(" + box + ")")
-                    button.setAttribute("class", "removeButton")
-                    button.setAttribute("style", "width: 72px;")
-                    document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                    if(document.getElementById("b" + box).offsetTop > 25) {
-                         document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
-                         document.getElementsByClassName("class")[box].style.width = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
-                    }
-                }
-            } else if(document.getElementById("b" + box)) {
-                document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
-                if(Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[box].clientWidth) {
-                    document.getElementsByClassName("class")[box].style.maxWidth = document.getElementsByClassName("class")[box].clientWidth + "px"
-                }
-                document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
             }
         }
     } else {
-        var allBoxesChecked = true
-        var checkBoxes = document.getElementsByClassName("cb" + box)
-        if(checkBoxes.length != 0) {
-            for(i=0;i<checkBoxes.length; i++) {
-                if(!checkBoxes[i].checked) {
-                    allBoxesChecked = false
-                }
+        allBoxesChecked = false
+    }
+    if(allBoxesChecked) {
+        if(!document.getElementById("b" + box)) {
+            var button = document.createElement("button")
+            button.innerHTML = "Remove"
+            button.setAttribute("id", "b" + box)
+            button.setAttribute("onclick", "removeHomework(" + box + ")")
+            button.setAttribute("class", "actionButton")
+            button.setAttribute("style", "width: 72px;")
+            document.getElementsByClassName("titleDiv")[box].appendChild(button)
+            if(document.getElementById("b" + box).offsetTop > 25) {
+                 document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+                 document.getElementsByClassName("class")[box].style.width = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
             }
-        } else {
-            allBoxesChecked = false
         }
-        if(allBoxesChecked) {
-            if(!document.getElementById("b" + box)) {
+    } else if(document.getElementById("b" + box)) {
+        document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
+        if(Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[box].clientWidth) {
+            document.getElementsByClassName("class")[box].style.maxWidth = document.getElementsByClassName("class")[box].clientWidth + "px"
+        }
+        document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
+    }
+    if(originalHw.length != 0) {
+        for(i=0;i<originalHw.length; i++) {
+            if(originalHw[i][0] == box && !document.getElementById("u" + box)) {
                 var button = document.createElement("button")
-                button.innerHTML = "Remove"
-                button.setAttribute("id", "b" + box)
-                button.setAttribute("onclick", "removeHomework(" + box + ")")
-                button.setAttribute("class", "removeButton")
+                button.innerHTML = "Undo"
+                button.setAttribute("id", "u" + box)
+                button.setAttribute("onclick", "undoHomework(" + box + ")")
+                button.setAttribute("class", "actionButton")
                 button.setAttribute("style", "width: 72px;")
                 document.getElementsByClassName("titleDiv")[box].appendChild(button)
-                if(document.getElementById("b" + box).offsetTop > 25) {
+                if(document.getElementById("u" + box).offsetTop > 25) {
                      document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
                      document.getElementsByClassName("class")[box].style.width = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
                 }
             }
-        } else if(document.getElementById("b" + box)) {
-            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + box).style.width.slice(0,-2)) - 11) + "px"
-            if(Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[box].clientWidth) {
-                document.getElementsByClassName("class")[box].style.maxWidth = document.getElementsByClassName("class")[box].clientWidth + "px"
-            }
-            document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         }
+    }
+}
+function checkBoxes(box, id, loop) {
+    if(loop) {
+        for(box=0;box<document.getElementsByClassName("class").length;box++) {
+            checkForRemoveButton(box)
+        }
+    } else {
+        checkForRemoveButton(box)
         updateScrollHeight(box)
         saveCheckBox(box, id)
     }
@@ -212,8 +208,10 @@ function removeAssignment(box, id) {
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
 }
+var originalHw = []
 function removeHomework(box) {
     if(confirm("Are you sure you want to remove all of your homeworks for " + document.getElementsByTagName("h3")[box].childNodes[0].nodeValue + "?")) {
+        originalHw.push([box, localStorage.getItem(box)])
         var homework = document.getElementsByClassName("homework")[box]
         while(homework.hasChildNodes()) {
             homework.removeChild(homework.firstChild)
@@ -222,6 +220,30 @@ function removeHomework(box) {
         document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("b" + box))
         updateScrollHeight(box)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
+        var button = document.createElement("button")
+        button.innerHTML = "Undo"
+        button.setAttribute("id", "u" + box)
+        button.setAttribute("onclick", "undoHomework(" + box + ")")
+        button.setAttribute("class", "actionButton")
+        button.setAttribute("style", "width: 72px;")
+        document.getElementsByClassName("titleDiv")[box].appendChild(button)
+        if(document.getElementById("u" + box).offsetTop > 25) {
+             document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+             document.getElementsByClassName("class")[box].style.width = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) + Number(button.style.width.slice(0, -2)) + 11) + "px"
+        }
+    }
+}
+function undoHomework(box) {
+    for(i=0;i<originalHw.length; i++) {
+        if(originalHw[i][0] == box) {
+            document.getElementsByClassName("homework")[box].innerHTML = originalHw[i][1]
+            document.getElementsByClassName("class")[box].style.maxWidth = (Number(document.getElementsByClassName("class")[box].style.maxWidth.slice(0, -2)) - Number(document.getElementById("u" + box).style.width.slice(0,-2)) - 11) + "px"
+            document.getElementsByClassName("titleDiv")[box].removeChild(document.getElementById("u" + box))
+            originalHw[i] = []
+            checkBoxes(box)
+            localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
+            
+        }
     }
 }
 var ids = ["title-popup", "x-div-popup", "div-popup", "bottom-popup"]
@@ -257,15 +279,6 @@ function popUpDiv(popUpName) {
                 document.getElementById("popup").classList.remove("animate-popup")
             }, 600)
             var h3 = document.getElementsByTagName("h3")
-            for(i=0;i< document.getElementsByClassName("class").length;i++) {
-                if(document.getElementById("b" + i)) {
-                    document.getElementsByClassName("class")[i].style.maxWidth = (Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) - Number(document.getElementById("b" + i).style.width.slice(0,-2)) - 11) + "px"
-                    if(Number(document.getElementsByClassName("class")[i].style.maxWidth.slice(0, -2)) < document.getElementsByClassName("class")[i].clientWidth) {
-                        document.getElementsByClassName("class")[i].style.maxWidth = document.getElementsByClassName("class")[i].clientWidth + "px"
-                    }
-                    document.getElementsByClassName("titleDiv")[i].removeChild(document.getElementById("b" + i))
-                }
-            }
             for(i=0; i<h3.length; i++) {
                 var checkbox = document.createElement("input")
                 checkbox.setAttribute("type", "checkbox")
@@ -353,9 +366,6 @@ function closePopUp() {
             document.getElementById(ids[i]).removeChild(document.getElementById(ids[i]).firstChild)
         }
     }
-    for(i=0;i<document.getElementsByClassName("class").length;i++) {
-        checkBoxes(null, null, true)
-    }
 }
 function popMenu() {
     document.getElementById("bar-setting").style.visibility = "visible"
@@ -392,6 +402,11 @@ function removeClasses() {
             for(i=0;i<document.getElementsByTagName("h3").length;i++) {
                 if(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue == checkBoxes[j]) {
                     elements.push(document.getElementsByClassName("class")[i])
+                    for(k=0;k<originalHw.length;k++) {
+                        if(originalHw[k] && originalHw[k][0] == i) {
+                            originalHw[k] = []
+                        }
+                    }
                     localStorage.setItem(i, "")
                 }
             }
@@ -401,6 +416,32 @@ function removeClasses() {
         }
         for(i=0;i<document.getElementsByClassName("textField").length;i++) {
             document.getElementsByClassName("textField")[i].setAttribute("onkeyup", "identifyTextField(" + i + ")")
+        }
+        for(i=0;i<document.getElementsByClassName("titleDiv").length;i++) {
+            if(document.getElementsByClassName("titleDiv")[i].childNodes[1]) {
+                if(document.getElementsByClassName("titleDiv")[i].childNodes[1].innerHTML == "Remove") {
+                    document.getElementsByClassName("titleDiv")[i].childNodes[1].setAttribute("id", "b" + i)
+                    document.getElementsByClassName("titleDiv")[i].childNodes[1].setAttribute("onclick", "removeHomework(" + i + ")")
+                } else if(document.getElementsByClassName("titleDiv")[i].childNodes[1].innerHTML == "Undo") {
+                    document.getElementsByClassName("titleDiv")[i].removeChild(document.getElementsByClassName("titleDiv")[i].childNodes[1])
+                    originalHw = []
+                }
+            }
+        }
+        for(j=0; j<document.getElementsByClassName("class").length; j++) {
+            for(i=0; i<document.getElementsByClassName("class")[j].childNodes.length; i++) {
+                if(document.getElementsByClassName("class")[j].childNodes[i].childNodes[0] != undefined && document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].tagName == "INPUT" && document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].type == "checkbox") {
+                    document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].removeAttribute("class")
+                    document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].setAttribute("class", "cb" + j)
+                    var attribute = document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].getAttribute("onclick")
+                    document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].removeAttribute("onclick")
+                    attribute = attribute.split("")
+                    attribute.splice(11, 1, j)
+                    attribute = attribute.join("")
+                    document.getElementsByClassName("class")[j].childNodes[i].childNodes[0].setAttribute("onclick", attribute)
+                    
+                }
+            }
         }
         closePopUp()
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
