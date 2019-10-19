@@ -13,9 +13,11 @@ window.onload = function() {
     } else {
         popUpDiv()
     }
+    /*
     if(localStorage.getItem("resize") == "true") {
         document.getElementById("resizeMenu").innerHTML = "Disable resize (beta)"
     }
+    */
     for(var i=0;i<document.getElementsByClassName("homework").length; i++) {
         document.getElementsByClassName("homework")[i].innerHTML = localStorage.getItem(i)
         checkBoxes(i)
@@ -68,6 +70,7 @@ function createCheckBox(text) {
     checkBoxes(text)
     localStorage.setItem(text, document.getElementsByClassName("homework")[text].innerHTML)
 }
+/*
 function activateResize() {
     if(document.getElementById("resizeMenu").innerHTML == "Activate resize (beta)") {
         for(i=0;i<document.getElementsByClassName("class").length; i++) {
@@ -86,6 +89,7 @@ function activateResize() {
     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     closeMenu()
 }
+*/
 function updateScrollHeight(text) {
     if(text) {
         const classHW = document.getElementsByClassName("class")[text]
