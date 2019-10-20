@@ -51,7 +51,33 @@ h3 {
     cursor: pointer;
     outline: none;
     margin-left: 10px;
-    width: 72px;
+}
+.actionMenu {
+    width: 100px;
+    float: right;
+    background-color: white;
+    z-index: 200;
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    overflow: visible !important;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+.actionMenu-Button {
+    border: none;
+    font-family: Arial;
+    font-size: 14px;
+    margin: 5px;
+    outline: none;
+}
+.actionMenu-Button:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+.titleDiv {
+    max-height: 37px;
 }
 #aHeader {
     text-decoration: none;
@@ -64,7 +90,7 @@ span {
     border-radius: 10px;
     position: relative;
     display: inline-block;
-    overflow: auto;
+    overflow: visible;
     vertical-align: top;
     min-width: 275px;
     height: auto;
