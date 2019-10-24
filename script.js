@@ -16,12 +16,10 @@ window.onload = function() {
         checkBoxes(i)
     }
 }
-function identifyTextField(text) {
-    document.getElementsByClassName("textField")[text].addEventListener("keyup", function(event) {
-         if (event.keyCode === 13) {
-             createCheckBox(text)
-         }
-    })
+function identifyTextField(event, text) {
+     if(event.keyCode === 13) {
+        createCheckBox(text)
+     }
 }
 function textEnter(event) {
     if(event.keyCode == 13) {
@@ -116,27 +114,6 @@ function activateResize() {
     closeMenu()
 }
 */
-function updateScrollHeight(text) {
-    if(text) {
-        const classHW = document.getElementsByClassName("class")[text]
-        const expandedHeight = classHW.style.height
-        classHW.style.height = "auto"
-        classHW.style.minHeight = 0
-        classHW.style.minHeight = classHW.clientHeight + "px"
-        classHW.style.height = expandedHeight
-        localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
-    } else {
-        for(i=0;i<document.getElementsByClassName("class").length;i++) {
-            const classHW = document.getElementsByClassName("class")[i]
-            const expandedHeight = classHW.style.height
-            classHW.style.height = "auto"
-            classHW.style.minHeight = 0
-            classHW.style.minHeight = classHW.scrollHeight + "px"
-            classHW.style.height = expandedHeight
-        }
-        localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
-    }
-}
 var removeButton = []
 var undoButton = []
 function checkForActionButton(box) {
@@ -180,7 +157,6 @@ function checkBoxes(box, id, loop) {
         }
     } else {
         checkForActionButton(box)
-        updateScrollHeight(box)
         saveCheckBox(box, id)
     }
 }
@@ -238,7 +214,6 @@ function removeHomework(box) {
             }
         }
         undoButton.push(box)
-        updateScrollHeight(box)
         localStorage.setItem(box, document.getElementsByClassName("homework")[box].innerHTML)
     }
 }
@@ -261,7 +236,6 @@ function undoHomework(box) {
 var ids = ["title-popup", "x-div-popup", "div-popup", "bottom-popup"]
 var addClassChilds = ["<span>Add a class</span>", "<button id=\"x-popup\" onclick=\"closePopUp()\">Cancel</buttton>", "<h4 id=\"label-popup\">Type in the name of the class</h4><input type=\"text\" onkeyup=\"textEnter(event)\" class=\"popup-text\" id=\"classText\" placeholder=\"Class Name\">", "<button id=\"addClass\" onclick=\"addClass()\">Add Class</button>"]
 var nameChilds = ["<span>Name</span>", "", "<h4 id=\"label-popup\">Type in your first name</h4><input type=\"text\" onkeyup=\"nameEnter(event)\" class=\"popup-text\" id=\"name-Text\" placeholder=\"First Name\">", "<button id=\"addClass\" onclick=\"registerName()\">Enter</button>"]
-var removeClassChilds = ["<span>Remove Class</span>", "<button id=\"x-popup\" onclick=\"closePopUp()\">Cancel</buttton>", "", "<button id=\"addClass\" onclick=\"removeClasses()\">Remove Class</button>"]
 var changeColorChilds = ["<span>Change colors</span>", "<button id=\"x-popup\" onclick=\"resetColors()\">Cancel</button>", "", "<button id=\"addClass\" onclick=\"changeColors()\">Change colors</button>"]
 function popUpDiv(popUpName) {
     closePopUp()
@@ -287,29 +261,6 @@ function popUpDiv(popUpName) {
             window.document.title = localStorage.getItem("name") + "'s Planner"
             document.getElementById("heading").innerHTML = localStorage.getItem("name") + "'s Planner"
             document.getElementById("classText").autofocus
-        } else if(popUpName == "removeClass") {
-            for(i=0;i<ids.length;i++) {
-                document.getElementById(ids[i]).insertAdjacentHTML("afterbegin", removeClassChilds[i])
-            }
-            document.getElementById("popup").classList.add("animate-popup")
-            setTimeout(function() {
-                document.getElementById("popup").classList.remove("animate-popup")
-            }, 600)
-            var h3 = document.getElementsByTagName("h3")
-            for(i=0; i<h3.length; i++) {
-                var checkbox = document.createElement("input")
-                checkbox.setAttribute("type", "checkbox")
-                checkbox.setAttribute("id", "dc" + i)
-                checkbox.setAttribute("class", "removeClassCB")
-                var label = document.createElement("label")
-                label.setAttribute("class", "removeCheckbox-label")
-                var labelText = document.createTextNode(h3[i].childNodes[0].nodeValue)
-                label.appendChild(labelText)
-                var br = document.createElement("br")
-                label.appendChild(br)
-                document.getElementById("div-popup").appendChild(checkbox)
-                document.getElementById("div-popup").appendChild(label)
-            }
         } else if (popUpName == "changeColors") {
             getOriginalColor()
             for(i=0;i<ids.length;i++) {
@@ -406,29 +357,29 @@ function rgb2hex(rgb) {
 function closeMenu() {
     document.getElementById("bar-setting").style.visibility = "hidden"
 }
-function removeClasses() {
-    if(confirm("Are you sure that you want to remove these classes?")) {
-        var checkBoxes = []
-        for(i=0;i<document.getElementsByTagName("h3").length;i++) {
-            if(document.getElementById("dc" + i).checked) {
-                checkBoxes.push(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue)
-            }
-        }
-        var elements = []
-        for(j=0;j<checkBoxes.length;j++) {
-            for(i=0;i<document.getElementsByTagName("h3").length;i++) {
-                if(document.getElementsByTagName("h3")[i].childNodes[0].nodeValue == checkBoxes[j]) {
-                    elements.push(document.getElementsByClassName("class")[i])
-                    originalHw = []
-                    localStorage.setItem(i, "")
+function colorChooser() {
+    
+}
+function removeClasses(box) {
+    if(confirm("Are you sure that you want to remove " + document.getElementsByTagName("h3")[box].childNodes[0].nodeValue + "? You will not be able to recover this class once it is deleted.")) {
+        originalHw = []
+        undoButton = []
+        for(i=0;i<document.getElementsByClassName("class").length;i++) {
+            if(i >= box) {
+                if(localStorage.getItem(i+1)) {
+                    localStorage.setItem(i, localStorage.getItem(i+1))
                 }
             }
         }
-        for(i=0;i<elements.length;i++) {
-            document.getElementsByTagName("main")[0].removeChild(elements[i])
+        for(i=0;i<removeButton.length;i++) {
+            if(removeButton[i] >= box) {
+                removeButton[i] = (removeButton[i]-1)
+            }
         }
+        document.getElementsByTagName("main")[0].removeChild(document.getElementsByClassName("class")[box])
         for(i=0;i<document.getElementsByClassName("textField").length;i++) {
-            document.getElementsByClassName("textField")[i].setAttribute("onkeyup", "identifyTextField(" + i + ")")
+            document.getElementsByClassName("textField")[i].removeAttribute("onkeyup")
+            document.getElementsByClassName("textField")[i].setAttribute("onkeyup", "identifyTextField(event, " + i + ")")
         }
         for(i=0;i<document.getElementsByClassName("titleDiv").length;i++) {
             document.getElementsByClassName("titleDiv")[i].childNodes[1].setAttribute("id", "menu" + i)
@@ -448,10 +399,15 @@ function removeClasses() {
                 }
             }
         }
-        for(i=0;i<removeButton.length;i++) {
-            removeButton[i] = (removeButton[i]-elements.length)
+        for(j=0;j<document.getElementsByClassName("class").length;j++) {
+            for(k=0;k<document.getElementsByTagName("p").length;k++) {
+                for(i=0;i<localStorage.getItem("id");i++) {
+                    if(document.getElementsByTagName("p")[k] && document.getElementsByTagName("p")[k].id == "i" + i && document.getElementsByClassName("class")[j].contains(document.getElementById("i" + i))) {
+                        document.getElementById("i" + i).setAttribute("onkeyup" , "removeAssignment(" + j + ", " + i + ")")
+                    }
+                }
+            }
         }
-        undoButton = []
         closePopUp()
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     }
@@ -472,7 +428,7 @@ function actionMenu(box) {
         for(i=0;i<removeButton.length;i++) {
             if(removeButton[i] == box) {
                 var remove = document.createElement("button")
-                remove.innerHTML = "Remove"
+                remove.innerHTML = "Remove homework"
                 remove.setAttribute("class", "actionMenu-Button")
                 remove.setAttribute("id", "Remove" + box)
                 remove.setAttribute("onclick", "removeHomework(" + box + ")")
@@ -494,6 +450,11 @@ function actionMenu(box) {
         color.setAttribute("class", "actionMenu-Button")
         color.setAttribute("onclick", "popUpDiv('changeColors')")
         div.appendChild(color)
+        var removeClass = document.createElement("button")
+        removeClass.innerHTML = "Remove Class"
+        removeClass.setAttribute("class", "actionMenu-Button")
+        removeClass.setAttribute("onclick", "removeClasses(" + box + ")")
+        div.appendChild(removeClass)
         document.getElementsByClassName("class")[box].appendChild(div)
         document.getElementsByClassName("class")[box].clientHeight = height + "px"
     } else {
@@ -547,7 +508,7 @@ function addClass() {
         textfield.setAttribute("autocapitalize", "off")
         textfield.setAttribute("spellcheck", "off")
         var numberOfTextfields = document.getElementsByClassName("textField").length
-        textfield.setAttribute("onkeyup", "identifyTextField(" + numberOfTextfields + ")")
+        textfield.setAttribute("onkeyup", "identifyTextField(event, " + numberOfTextfields + ")")
         divText.appendChild(textfield)
         div.appendChild(divText)
         document.getElementsByTagName("main")[0].appendChild(div)
@@ -558,7 +519,6 @@ function addClass() {
         }
         localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
         document.getElementById("classText").value = ""
-        updateScrollHeight(numberOfTextfields)
         closePopUp()
     } else if(acceptableClassTitle == "sameClass") {
         var error = document.createElement("p")
