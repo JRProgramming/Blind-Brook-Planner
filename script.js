@@ -50,15 +50,7 @@ function createCheckBox(text) {
         label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'></p><br>"
         var hw = document.getElementsByClassName("textField")[text].value
         if(hw == hw.toUpperCase() || hw.includes("!")) {
-            if(hw.includes("!")) {
-                for(i=0;i<hw.length;i++) {
-                    if(hw[i] == "!") {
-                        hw = hw.split("")
-                        hw.splice(i, 1)
-                        hw = hw.join("")
-                    }
-                }
-            }
+            hw = hw.replace(/!/g, "")
             document.getElementsByClassName("homework")[text].insertBefore(checkbox, document.getElementsByClassName("homework")[text].childNodes[0])
             document.getElementsByClassName("homework")[text].insertBefore(label, document.getElementsByClassName("homework")[text].childNodes[1])
         } else {
@@ -356,9 +348,6 @@ function rgb2hex(rgb) {
 }
 function closeMenu() {
     document.getElementById("bar-setting").style.visibility = "hidden"
-}
-function colorChooser() {
-    
 }
 function removeClasses(box) {
     if(confirm("Are you sure that you want to remove " + document.getElementsByTagName("h3")[box].childNodes[0].nodeValue + "? You will not be able to recover this class once it is deleted.")) {
