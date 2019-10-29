@@ -46,6 +46,7 @@ function createCheckBox(text) {
         checkbox.setAttribute("onclick", "checkBoxes(" + text + "," + id  + ")")
         var label = document.createElement("label")
         label.setAttribute("id", "l" + id)
+        label.setAttribute("class", "l" + text)
         var size = document.getElementsByClassName("textField")[text].value.length
         label.innerHTML = "<p autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" contenteditable=\"true\" class=\"homeworkLabel\" id='i" + id + "'></p><br>"
         var hw = document.getElementsByClassName("textField")[text].value
@@ -56,6 +57,10 @@ function createCheckBox(text) {
         } else {
             document.getElementsByClassName("homework")[text].appendChild(checkbox)
             document.getElementsByClassName("homework")[text].appendChild(label)
+        }
+        var homeworkLabel = document.getElementsByClassName("l" + text)[document.getElementsByClassName("l" + text).length-1]
+        if(!(hw.charAt(0) == hw.charAt(0).toUpperCase())) {
+            homeworkLabel.childNodes[0].style.top = "-4px"
         }
         var p = document.getElementById("i" + id)
         var homeworkTitle = document.createTextNode(hw)
@@ -104,6 +109,27 @@ function activateResize() {
     }
     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
     closeMenu()
+}
+function updateScrollHeight(text) {
+    if(text) {
+     const classHW = document.getElementsByClassName("class")[text]
+     const expandedHeight = classHW.style.height
+     classHW.style.height = "auto"
+     classHW.style.minHeight = 0
+     classHW.style.minHeight = classHW.clientHeight + "px"
+     classHW.style.height = expandedHeight
+     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
+    } else {
+     for(i=0;i<document.getElementsByClassName("class").length;i++) {
+         const classHW = document.getElementsByClassName("class")[i]
+         const expandedHeight = classHW.style.height
+         classHW.style.height = "auto"
+         classHW.style.minHeight = 0
+         classHW.style.minHeight = classHW.scrollHeight + "px"
+         classHW.style.height = expandedHeight
+     }
+     localStorage.setItem("class", document.getElementsByTagName("main")[0].innerHTML)
+    }
 }
 */
 var removeButton = []
@@ -350,16 +376,15 @@ function closeMenu() {
     document.getElementById("bar-setting").style.visibility = "hidden"
 }
 function removeClasses(box) {
+    //localStorage doesn't update localStorage.getItem(i) when a class is removed, but only when there is a change to the box
+    for(i=0;i<document.getElementsByClassName("class").length; i++) {
+        if(document.getElementsByClassName("class")[i].contains(document.getElementById("actionMenu" + i))) {
+            document.getElementsByClassName("class")[i].removeChild(document.getElementById("actionMenu" + i))
+        }
+    }
     if(confirm("Are you sure that you want to remove " + document.getElementsByTagName("h3")[box].childNodes[0].nodeValue + "? You will not be able to recover this class once it is deleted.")) {
         originalHw = []
         undoButton = []
-        for(i=0;i<document.getElementsByClassName("class").length;i++) {
-            if(i >= box) {
-                if(localStorage.getItem(i+1)) {
-                    localStorage.setItem(i, localStorage.getItem(i+1))
-                }
-            }
-        }
         for(i=0;i<removeButton.length;i++) {
             if(removeButton[i] >= box) {
                 removeButton[i] = (removeButton[i]-1)
@@ -395,6 +420,14 @@ function removeClasses(box) {
                         document.getElementById("i" + i).setAttribute("onkeyup" , "removeAssignment(" + j + ", " + i + ")")
                     }
                 }
+            }
+        }
+        for(i=0;i<document.getElementsByClassName("class").length+1;i++) {
+            if(i == document.getElementsByClassName("class").length) {
+                localStorage.removeItem(i)
+            }
+            if(i >= box && localStorage.getItem(i+1)) {
+                localStorage.setItem(i, document.getElementsByClassName("homework")[i].innerHTML)
             }
         }
         closePopUp()
