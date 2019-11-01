@@ -357,3 +357,6 @@ input[type="color"] {
     cursor: pointer;
     outline: none;
 }
+#x-popup:hover {
+    opacity: 0.6;
+}

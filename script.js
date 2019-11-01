@@ -442,6 +442,11 @@ function registerName() {
     popUpDiv("addClass")
 }
 function actionMenu(box) {
+    for(i=0;i<document.getElementsByClassName("class").length; i++) {
+        if(document.getElementsByClassName("class")[i].contains(document.getElementById("actionMenu" + i))) {
+            document.getElementsByClassName("class")[i].removeChild(document.getElementById("actionMenu" + i))
+        }
+    }
     if(!document.getElementsByClassName("class")[box].contains(document.getElementById("actionMenu" + box))) {
         var height = document.getElementsByClassName("class")[box].clientHeight
         var div = document.createElement("div")
