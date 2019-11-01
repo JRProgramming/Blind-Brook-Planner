@@ -443,7 +443,7 @@ function registerName() {
 }
 function actionMenu(box) {
     for(i=0;i<document.getElementsByClassName("class").length; i++) {
-        if(document.getElementsByClassName("class")[i].contains(document.getElementById("actionMenu" + i))) {
+        if(document.getElementsByClassName("class")[i].contains(document.getElementById("actionMenu" + i)) && i != box) {
             document.getElementsByClassName("class")[i].removeChild(document.getElementById("actionMenu" + i))
         }
     }
