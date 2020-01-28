@@ -145,6 +145,7 @@ input[type="text"] {
     cursor: pointer;
 }
 .popup {
+    border-radius: 10px;
     z-index: 11;
     font-family: Arial;
     background-color: white;
@@ -217,6 +218,7 @@ input[type="text"] {
     margin: 10px;
 }
 #addClass {
+    border-radius: 5px;
     width: 100%;
     height: 60px;
     border: transparent;
